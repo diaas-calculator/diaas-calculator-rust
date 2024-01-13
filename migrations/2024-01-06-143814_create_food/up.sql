@@ -1,0 +1,21 @@
+CREATE TABLE food (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
+  protein_content REAL NOT NULL,
+  food_type VARCHAR NOT NULL,
+  score_type VARCHAR NOT NULL,
+  protein_content_cooked_state VARCHAR NOT NULL,
+  diaas_cooked_state VARCHAR NOT NULL,
+  histidine_score REAL NOT NULL,
+  isoleucine_score REAL NOT NULL,
+  leucine_score REAL NOT NULL,
+  lysine_score REAL NOT NULL,
+  saa_score REAL NOT NULL,
+  aaa_score REAL NOT NULL,
+  tryptophane_score REAL NOT NULL,
+  threonine_score REAL NOT NULL,
+  valine_score REAL NOT NULL,
+  reference_link VARCHAR NOT NULL,
+  reference_details VARCHAR NOT NULL,
+  comment VARCHAR NOT NULL
+)
