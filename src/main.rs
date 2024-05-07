@@ -26,8 +26,10 @@ async fn main() -> Result<()> {
     // set up database connection pool
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL");
     let bin_addr = env::var("BIND_ADDR").expect("BIND_ADDR");
+    let max_db_connections: u32 = env::var("MAX_DB_CONNECTIONS").expect("MAX_DB_CONNECTIONS").parse().unwrap();
     let manager = ConnectionManager::<PgConnection>::new(database_url);
     let pool = r2d2::Pool::builder()
+        .max_size(max_db_connections)
         .build(manager)
         .expect("Failed to create pool");
 
