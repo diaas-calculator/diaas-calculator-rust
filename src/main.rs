@@ -25,6 +25,7 @@ async fn main() -> Result<()> {
     dotenv().ok();
     // set up database connection pool
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL");
+    let bin_addr = env::var("BIND_ADDR").expect("BIND_ADDR");
     let manager = ConnectionManager::<PgConnection>::new(database_url);
     let pool = r2d2::Pool::builder()
         .build(manager)
@@ -44,7 +45,7 @@ async fn main() -> Result<()> {
             .service(food::search)
             //.service(food::update)
     })
-    .bind("0.0.0.0:9090")?
+    .bind(bin_addr)?
     .run()
     .await
 }
