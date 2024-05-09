@@ -1,7 +1,7 @@
 use actix_web::web::{Data, Json, Path};
 use actix_web::{get, post, delete, put, web, HttpResponse};
 use diesel::result::Error;
-use diesel::{ExpressionMethods, Insertable, Queryable, RunQueryDsl, TextExpressionMethods};
+use diesel::{ExpressionMethods, Insertable, Queryable, RunQueryDsl, PgTextExpressionMethods, QueryDsl};
 use serde::{Deserialize, Serialize};
 
 use crate::constants::{APPLICATION_JSON, CONNECTION_POOL_ERROR, MAX_FOOD_ITEMS};
@@ -9,7 +9,6 @@ use crate::response::Response;
 use crate::{DBPool, DBPooledConnection};
 
 use super::schema::food;
-use diesel::query_dsl::methods::{FilterDsl, LimitDsl};
 
 pub type FoodItems = Response<Food>;
 
@@ -241,7 +240,7 @@ fn list_food_items(max_items: i64, conn: &mut DBPooledConnection) -> Result<Food
     use crate::schema::food::dsl::*;
 
     let _food_items = match food
-//        .order(created_at.desc())
+        .order(name)
         .limit(max_items)
         .load::<FoodDB>(conn)
     {
@@ -279,8 +278,8 @@ fn find_food_items_by_name(max_items: i64, _name: &String, conn: &mut DBPooledCo
     let pattern = format!("%{}%", _name);
 
     let _food_items = match food
-//        .order(created_at.desc())
-        .filter(name.like(pattern))
+        .order(name)
+        .filter(name.ilike(pattern))
         .limit(max_items)
         .load::<FoodDB>(conn)
     {

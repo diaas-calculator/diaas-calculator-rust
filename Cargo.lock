@@ -450,7 +450,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "diaas-calculator"
+name = "diaas-calculator-rust"
 version = "0.1.0"
 dependencies = [
  "actix-rt",
