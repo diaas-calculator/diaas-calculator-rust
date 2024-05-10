@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
+// search results are encapsulated in a "results" json object
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Response<T> {
+pub struct Results<T> {
     pub results: Vec<T>,
 }
