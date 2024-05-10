@@ -42,10 +42,10 @@ async fn main() -> Result<()> {
             // register HTTP requests handlers
             .service(food::list)
             .service(food::get)
-            .service(food::create)
-            .service(food::delete)
+            //.service(food::create)
+            //.service(food::delete)
             .service(food::search)
-            .service(food::update)
+            //.service(food::update)
     })
     .bind(bin_addr)?
     .run()
