@@ -9,6 +9,7 @@ actix-web = "4.4.1"
 chrono = { version = "0.4.31", features = ["serde"] }
 diesel = { version = "2.1.4", features = ["postgres", "r2d2", "chrono", "uuid", "returning_clauses_for_sqlite_3_35"] }
 dotenvy = "0.15.7"
+log = { version = "0.4.21" }
 env_logger = "0.10.1"
 r2d2 = "0.8.10"
 r2d2-diesel = "1.0.0"

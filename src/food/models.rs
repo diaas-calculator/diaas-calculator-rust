@@ -1,9 +1,10 @@
 use diesel::prelude::*;
-use super::super::schema::food;
+use super::super::schema::{food,food_i18n};
 use serde::{Deserialize, Serialize};
 use crate::results::Results;
 
 pub type FoodItems = Results<Food>;
+pub type FoodItemsI18n = Results<(Food,FoodI18n)>;
 
 //TODO handle reference_details and comment null
 #[derive(Debug, Deserialize, Serialize, Queryable, Insertable)]
@@ -177,4 +178,12 @@ impl NewFood {
             _ => None
         }
     }
+}
+
+#[derive(Debug, Deserialize, Serialize, Queryable, Insertable)]
+#[diesel(table_name = food_i18n)]
+pub struct FoodI18n {
+    pub lang: String,
+    pub food_id: i32,
+    pub name_translation: String
 }

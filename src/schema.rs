@@ -23,3 +23,18 @@ diesel::table! {
         comment -> Varchar,
     }
 }
+
+diesel::table! {
+    food_i18n (lang, food_id, name_translation) {
+        lang -> Varchar,
+        food_id -> Int4,
+        name_translation -> Varchar,
+    }
+}
+
+diesel::joinable!(food_i18n -> food (food_id));
+
+diesel::allow_tables_to_appear_in_same_query!(
+    food,
+    food_i18n,
+);

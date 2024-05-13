@@ -1,0 +1,21 @@
+LOAD CSV
+   FROM 'food_i18n.csv' WITH ENCODING UTF-8
+        HAVING FIELDS
+        (
+           lang,food_id,name_translation
+        )
+   INTO postgresql://diaasc:password1234!@db:5432/diaas-calculator
+        TARGET TABLE food_i18n
+        TARGET COLUMNS
+        (
+           lang,food_id,name_translation
+        )
+   WITH truncate,
+        skip header = 1,
+        fields optionally enclosed by '"',
+        fields escaped by backslash-quote,
+        fields terminated by ';',
+        workers = 4,
+        concurrency = 1
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';

@@ -1,14 +1,13 @@
 use actix_web::web::{Data, Json, Path};
 use actix_web::{error, get, post, delete, put, web, HttpResponse, Responder};
-
 use serde::Deserialize;
+use log::{trace,warn};
 
-use crate::constants::{CONNECTION_POOL_ERROR, MAX_FOOD_ITEMS};
+use crate::constants::{CONNECTION_POOL_ERROR, MAX_FOOD_ITEMS, I18N_LANGUAGES};
 use crate::DBPool;
 
 mod actions;
 mod models;
-
 
 
 /// get a food item by its id `/food/{id}`
@@ -41,18 +40,21 @@ pub async fn get(
 }
 
 
+
 /// list all food items
 #[get("api/food")]
-pub async fn list(pool: Data<DBPool>
+pub async fn list(
+    pool: Data<DBPool>
 )-> actix_web::Result<impl Responder>  {
     let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
-    println!("called get without name");
+
     let food_items = 
         web::block(
             move || 
                 actions::list_food_items(
-                    MAX_FOOD_ITEMS, 
-                    &mut conn)
+                    MAX_FOOD_ITEMS,
+                    &mut conn
+                )
             )
             .await?
             // map diesel query errors to a 500 error response
@@ -63,18 +65,91 @@ pub async fn list(pool: Data<DBPool>
 
 
 #[derive(Debug, Deserialize)]
+pub struct FoodI18nList {
+   lang: String
+}
+
+#[get("api/food_i18n")]
+pub async fn list_i18n(
+    query_params: web::Query<FoodI18nList>,
+    pool: Data<DBPool>
+)-> actix_web::Result<impl Responder>  {
+    trace!("get api/food (list). Lang: {}", query_params.lang);
+    if !I18N_LANGUAGES.contains(&query_params.lang.as_str()){
+        warn!("list_i18n: We don't know this language: {}.", query_params.lang);
+        return Ok(HttpResponse::BadRequest().body(format!("We don't know this language")))
+    }
+
+    let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let food_items = 
+        web::block(
+            move || 
+                actions::list_food_items_i18n(
+                    MAX_FOOD_ITEMS, 
+                    &query_params.lang,
+                    &mut conn
+                )
+            )
+            .await?
+            // map diesel query errors to a 500 error response
+            .map_err(error::ErrorInternalServerError)?;
+
+    Ok(HttpResponse::Ok().json(food_items))
+}
+
+
+
+#[derive(Debug, Deserialize)]
 pub struct FoodSearch {
    name: String
 }
 
-/// search food items by name
+
+#[derive(Debug, Deserialize)]
+pub struct FoodSearchI18n {
+   name: String,
+   lang: String
+}
+
+
+/// search food items by name with a translation
+#[get("api/food_i18n/search/")]
+pub async fn search_i18n(
+    query_params: web::Query<FoodSearchI18n>, 
+    pool: Data<DBPool>
+) -> actix_web::Result<impl Responder> {
+    trace!("get api/food_i18n/search/ with name={} for lang={}", query_params.name, query_params.lang);
+    if !I18N_LANGUAGES.contains(&query_params.lang.as_str()){
+        warn!("search_i18n: We don't know this language: {}.", query_params.lang);
+        return Ok(HttpResponse::BadRequest().body(format!("We don't know this language")))
+    }
+
+    let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let food_items = 
+        web::block(
+            move || 
+                actions::find_food_items_by_name_i18n(
+                    MAX_FOOD_ITEMS,
+                    &query_params.name, 
+                    &query_params.lang, 
+                    &mut conn)
+            )
+            .await?
+            // map diesel query errors to a 500 error response
+            .map_err(error::ErrorInternalServerError)?;
+
+    Ok(HttpResponse::Ok().json(food_items))
+}
+
+
+/// search food items by name with a translation
 #[get("api/food/search/")]
 pub async fn search(
     query_params: web::Query<FoodSearch>, 
     pool: Data<DBPool>
 ) -> actix_web::Result<impl Responder> {
+    trace!("get api/food/search/ with name={}", query_params.name);
     let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
-    println!("name searched={}", query_params.name);
     let food_items = 
         web::block(
             move || 
@@ -89,7 +164,6 @@ pub async fn search(
 
     Ok(HttpResponse::Ok().json(food_items))
 }
-
 
 /// create a food item `/food`
 #[post("api/food")]

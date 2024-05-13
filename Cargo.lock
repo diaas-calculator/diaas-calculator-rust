@@ -459,6 +459,7 @@ dependencies = [
  "diesel 2.1.4",
  "dotenvy",
  "env_logger",
+ "log",
  "r2d2",
  "r2d2-diesel",
  "serde",

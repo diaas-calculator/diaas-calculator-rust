@@ -19,10 +19,9 @@ pub type DBPooledConnection = PooledConnection<ConnectionManager<PgConnection>>;
 
 #[actix_rt::main]
 async fn main() -> Result<()> {
-    env::set_var("RUST_LOG", "actix_web=debug,actix_server=info");
+    dotenv().ok();
     env_logger::init();
 
-    dotenv().ok();
     // set up database connection pool
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL");
     let bin_addr = env::var("BIND_ADDR").expect("BIND_ADDR");
@@ -41,10 +40,13 @@ async fn main() -> Result<()> {
             .wrap(middleware::Logger::default())
             // register HTTP requests handlers
             .service(food::list)
+            .service(food::list_i18n)
             .service(food::get)
+            .service(food::search)
+            .service(food::search_i18n)
+            // waiting for authentication implementation
             //.service(food::create)
             //.service(food::delete)
-            .service(food::search)
             //.service(food::update)
     })
     .bind(bin_addr)?
