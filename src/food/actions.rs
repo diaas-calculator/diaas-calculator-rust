@@ -36,7 +36,7 @@ pub fn list_food_items_i18n(max_items: i64, param_lang: &String, conn: &mut DBPo
     // TODO outer join to handle missing translation
     .inner_join(food_i18n)
     .filter(lang.eq(param_lang))
-    .order(name)
+    .order(name_translation)
     .limit(max_items)
     .load::<(models::Food,models::FoodI18n)>(conn)
     {
