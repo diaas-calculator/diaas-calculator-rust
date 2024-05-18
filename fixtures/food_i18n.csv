@@ -19,14 +19,14 @@ fr;17;Graines de courge (crues)
 fr;18;Fèves (farine)
 fr;19;Haricots rouges (bouillis)
 fr;20;Haricots blancs (bouillis)
-fr;21;Pois isolat de protéine (poudre, crue)
+fr;21;Pois, isolat de protéine (poudre, crue)
 fr;22;Pois chiche (bouillis)
-fr;23;Pois cassés verts (bouillis)
+fr;23;Pois cassés verts, farine
 fr;24;Soja (trempé, bouilli)
-fr;25;Soja lait
+fr;25;Soja, lait
 fr;26;Tofu (soja)
 fr;27;Oeufs (bouillis)
-fr;28;Bacon porc (fumé et cuit)
+fr;28;Bacon, porc (fumé et cuit)
 fr;29;Jambon de porc (fumé)
 fr;30;Boeuf haché (cru)
 fr;31;Boeuf haché (cuit)
@@ -34,3 +34,9 @@ fr;32;Whey (crue)
 fr;33;Lait en poudre
 fr;34;Lait
 fr;35;Yaourt
+fr;36;Pois cassés jaunes, farine
+fr;37;Lentilles vertes, semence canadienne (bouillies)
+fr;38;Lentilles corail, semence canadienne (bouillies)
+fr;39;Pois chiches, semence canadienne (trempés, bouillis)
+fr;40;Pois cassés verts, semence canadienne (bouillis)
+fr;41;Pois cassés jaunes, semence canadienne (bouillis)
