@@ -87,6 +87,8 @@ In case something inspires you, here's the top of my todo list (please open an i
 
   - suggested recipes
 
+  - giving suggestion based on current mix (a specific search request with the current mix diaaas, so that the backend sorts the food items by better match first.)
+
   - g co2/g of protein
 
   - equivalent g of complete protein
@@ -100,7 +102,7 @@ In case something inspires you, here's the top of my todo list (please open an i
   - mode compare: food items and/or mix
 
   - add more details about studies in case links go dead (name, authors, date, journal). new table?
-
+  
   - special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
 
 
@@ -137,8 +139,18 @@ Things to be careful with:
 
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
 - Type of DIAAS : "real" DIAAS or in vivo or on rat model etc...
+- The amino acids are often given in the same order, but not always.
+- Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6month old eat grains and legumes and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 
-It is perfectly acceptable to add an item that is already present in the database, but then the characteristics must be different so that users can choose the appropriate one (ex: cooked vs crude, soaked or not...). If everything is the same, please keep a single entry, the one that seems the most accurate (or compute an average but currently we have only a single link available in the details)
+| his  | iso        | leu        | lys    | met+cys    | phe+tyr    | thr  | trp        | val   |
+| ---- | ---------- | ---------- | ------ | ---------- | ---------- | ---- | ---------- | ----- |
+| 1,25 | 1,06666667 | 1,08196721 | 1,1875 | 1,17391304 | 1,26829268 | 1,24 | 1,28787879 | 1,075 |
+
+
+
+**About duplicate elements**:
+
+It is perfectly acceptable to add an item that is already present in the database if the characteristics are different so that users can choose the appropriate one (ex: cooked vs crude, soaked or not...). If everything is the same, please keep a single entry, the one that seems the most accurate (or compute an average but currently we have only a single link available in the details)
 
 
 
