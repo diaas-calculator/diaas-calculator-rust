@@ -1,0 +1,29 @@
+version: '3.1'
+services :
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: diaasc
+      POSTGRES_PASSWORD: password1234!
+      POSTGRES_DB: diaas-calculator
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - diaas-db
+  admin:
+    image: adminer
+    restart: 'no'
+    depends_on: 
+      - db
+    ports:
+      - 8080:8080
+    networks:
+      - diaas-db
+volumes:
+  pgdata:
+networks:
+  diaas-db:
+    name: diaas-db
+    external: true

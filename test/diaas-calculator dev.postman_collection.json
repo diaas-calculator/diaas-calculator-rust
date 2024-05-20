@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "2b1461fa-0b22-4576-8434-8de3c934ba4c",
+		"name": "diaas-calculator dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7407189"
+	},
+	"item": [
+		{
+			"name": "list food items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "list food items i18n",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food_i18n?lang=fr",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food_i18n"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "fr"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "search food items by name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food/search/?name=oats",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "oats"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "search food items by name i18n",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food_i18n/search/?name=blé&lang=fr",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food_i18n",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "blé"
+						},
+						{
+							"key": "lang",
+							"value": "fr"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "get food item by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food/40",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food",
+						"40"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "delete food item by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/food/43",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food",
+						"43"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "create food (oats)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Oats (quick oats, crude)\",\r\n    \"protein_content\": 12,\r\n    \"food_type\": \"Grains\",\r\n    \"score_type\": \"DIAAS\",\r\n    \"protein_content_cooked_state\": \"crude\",\r\n    \"diaas_cooked_state\": \"crude\",\r\n    \"histidine_score\": 118,\r\n    \"isoleucine_score\": 110,\r\n    \"leucine_score\": 103,\r\n    \"lysine_score\": 67,\r\n    \"saa_score\": 177,\r\n    \"aaa_score\": 184,\r\n    \"threonine_score\": 104,\r\n    \"tryptophane_score\": 140,\r\n    \"valine_score\": 107,\r\n    \"reference_link\": \"https://nutrition.ansci.illinois.edu/sites/nutrition.ansci.illinois.edu/files/2.%20Fanelli%20et%20al.%2C%20milk-break%20fast%20cereals%2C%20JN%2C%20Feb.%2010%2C%202021.pdf\",\r\n    \"reference_details\": \"Table 4\",\r\n    \"comment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/food",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "create food (wheat)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Wheat (average)\",\r\n    \"protein_content\": 13.7,\r\n    \"food_type\": \"Grains\",\r\n    \"score_type\": \"DIAAS\",\r\n    \"protein_content_cooked_state\": \"crude\",\r\n    \"diaas_cooked_state\": \"crude\",\r\n    \"histidine_score\": 148,\r\n    \"isoleucine_score\": 98,\r\n    \"leucine_score\": 95,\r\n    \"lysine_score\": 56,\r\n    \"saa_score\": 150,\r\n    \"aaa_score\": 138,\r\n    \"threonine_score\": 97,\r\n    \"tryptophane_score\": 162,\r\n    \"valine_score\": 98,\r\n    \"reference_link\": \"https://onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Ffsn3.1809&file=fsn31809-sup-0001-TabS1-S4.docx\",\r\n    \"reference_details\": \"S3\",\r\n    \"comment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/food",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "update food",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Oat2 (quick oats, crude)\",\r\n    \"protein_content\": 12,\r\n    \"food_type\": \"Grains\",\r\n    \"score_type\": \"DIAAS\",\r\n    \"protein_content_cooked_state\": \"crude\",\r\n    \"diaas_cooked_state\": \"crude\",\r\n    \"histidine_score\": 118,\r\n    \"isoleucine_score\": 110,\r\n    \"leucine_score\": 103,\r\n    \"lysine_score\": 67,\r\n    \"saa_score\": 177,\r\n    \"aaa_score\": 184,\r\n    \"threonine_score\": 104,\r\n    \"tryptophane_score\": 140,\r\n    \"valine_score\": 107,\r\n    \"reference_link\": \"https://nutrition.ansci.illinois.edu/sites/nutrition.ansci.illinois.edu/files/2.%20Fanelli%20et%20al.%2C%20milk-break%20fast%20cereals%2C%20JN%2C%20Feb.%2010%2C%202021.pdf\",\r\n    \"reference_details\": \"Table 4\",\r\n    \"comment\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/food/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"food",
+						"1"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		}
+	]
+}
