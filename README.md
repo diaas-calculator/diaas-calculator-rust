@@ -2,6 +2,8 @@
 
 This is the rust backend for the [Protein DIAAS calculator](https://www.diaas-calculator.com/)
 
+See also the frontend project [DIAAS calculator angular](https://github.com/diaas-calculator/diaas-calculator-angular)
+
 #  Architecture
 
 - Language: [rust](https://rust-lang.org)
@@ -140,7 +142,7 @@ Things to be careful with:
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
 - Type of DIAAS : "real" DIAAS or in vivo or on rat model etc...
 - The amino acids are often given in the same order, but not always.
-- Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6month old eat grains and legumes and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
+- Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6 month old eat grains and legumes, and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 
 | his  | iso        | leu        | lys    | met+cys    | phe+tyr    | thr  | trp        | val   |
 | ---- | ---------- | ---------- | ------ | ---------- | ---------- | ---- | ---------- | ----- |
@@ -152,8 +154,12 @@ Things to be careful with:
 
 It is perfectly acceptable to add an item that is already present in the database if the characteristics are different so that users can choose the appropriate one (ex: cooked vs crude, soaked or not...). If everything is the same, please keep a single entry, the one that seems the most accurate (or compute an average but currently we have only a single link available in the details)
 
+## Content reviewing
 
+Don't hesitate to reach us should you find any error, be it English error, or scientific fact error.
 
 # Contact us
+
+Don't hesitate to contact us if you have any questions or want to discuss anything about this project.
 
 We're currently looking for a slack or similar community to attach to. In the meantime you can always reach us by opening an issue on github.
