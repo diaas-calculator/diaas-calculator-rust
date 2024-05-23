@@ -141,6 +141,7 @@ Things to be careful with:
 
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
 - Type of DIAAS : "real" DIAAS or in vivo or on rat model etc...
+- Type of digestive model. From least to most accurate : Apparent ileal digestibility (AID), Standardized ileal digestibility (SID), True ileal digestibility (TID)
 - The amino acids are often given in the same order, but not always.
 - Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6 month old eat grains and legumes, and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 

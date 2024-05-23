@@ -23,7 +23,7 @@ async fn main() -> Result<()> {
     env_logger::init();
 
     // set up database connection pool
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL");
+    let database_url = env::var("POSTGRESQL_ADDON_URI").expect("POSTGRESQL_ADDON_URI");
     let bin_addr = env::var("BIND_ADDR").expect("BIND_ADDR");
     let max_db_connections: u32 = env::var("MAX_DB_CONNECTIONS").expect("MAX_DB_CONNECTIONS").parse().unwrap();
     let manager = ConnectionManager::<PgConnection>::new(database_url);
