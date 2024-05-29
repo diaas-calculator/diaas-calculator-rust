@@ -81,7 +81,7 @@ Note that all the endpoints that modify data are deactivated for now (waiting fo
 
 This is an opensource project. All the contributions are welcome!
 
-In case something inspires you, here's the top of my todo list (please open an issue to mention you're working on it if you do): 
+In case something inspires you, here's the top of my todo list (please contact on on slack before starting anything significant): 
 
 - Front + Back: 
 
@@ -95,6 +95,8 @@ In case something inspires you, here's the top of my todo list (please open an i
 
   - equivalent g of complete protein
 
+  - hidden flag: for diaas that we keep for comparison but we want to hide to most users because we believe there is a better result
+
   - user profile
 
   - personal recipes (shared or not)
@@ -102,7 +104,7 @@ In case something inspires you, here's the top of my todo list (please open an i
   - personal food items
 
   - mode compare: food items and/or mix
-
+  
   - add more details about studies in case links go dead (name, authors, date, journal). new table?
   
   - special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
@@ -134,8 +136,7 @@ You can help with food item translation into other languages. See for example `f
 
 Gathering the `DIAAS` data is a tedious and error-prone process. Contributions could be :
 
-- Reviewing the current dataset
-- Adding more data (see `fixtures/food.csv`)
+- Reviewing the current dataset, adding more data (see `fixtures/food.csv`)
 
 Things to be careful with: 
 
@@ -149,11 +150,11 @@ Things to be careful with:
 | ---- | ---------- | ---------- | ------ | ---------- | ---------- | ---- | ---------- | ----- |
 | 1,25 | 1,06666667 | 1,08196721 | 1,1875 | 1,17391304 | 1,26829268 | 1,24 | 1,28787879 | 1,075 |
 
+To convert from the *PDCAAS* *2-5 years old* reference pattern to the *DIAAS* *>3years old* reference pattern, use those coefficients: 
 
-
-**About duplicate elements**:
-
-It is perfectly acceptable to add an item that is already present in the database if the characteristics are different so that users can choose the appropriate one (ex: cooked vs crude, soaked or not...). If everything is the same, please keep a single entry, the one that seems the most accurate (or compute an average but currently we have only a single link available in the details)
+| his    | iso        | leu        | lys        | met+cys    | phe+tyr    | thr  | trp        | val   |
+| ------ | ---------- | ---------- | ---------- | ---------- | ---------- | ---- | ---------- | ----- |
+| 1,1875 | 0,93333333 | 1,08196721 | 1,20833333 | 1,08695652 | 1,53658537 | 1,36 | 1,66666667 | 0,875 |
 
 ## Content reviewing
 
@@ -161,6 +162,4 @@ Don't hesitate to reach us should you find any error, be it English error, or sc
 
 # Contact us
 
-Don't hesitate to contact us if you have any questions or want to discuss anything about this project.
-
-We're currently looking for a slack or similar community to attach to. In the meantime you can always reach us by opening an issue on github.
+Don't hesitate to [contact us on slack](https://join.slack.com/t/nouvelespaced-u4p4016/shared_invite/zt-2jknsft6u-4RSF2n09gGkJtXqBvvpQZg) if you have any questions or want to discuss anything about this project.
