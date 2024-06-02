@@ -85,36 +85,31 @@ In case something inspires you, here's the top of my todo list (please contact o
 
 - Front + Back: 
 
-  - unit test, ci-cd
-
-  - suggested recipes
-
   - giving suggestion based on current mix (a specific search request with the current mix diaaas, so that the backend sorts the food items by better match first.)
 
-  - g co2/g of protein
-
+  - suggested / example mixes
+- g co2/g of protein
   - equivalent g of complete protein
 
   - hidden flag: for diaas that we keep for comparison but we want to hide to most users because we believe there is a better result
-
+- unit test, ci-cd
   - user profile
-
-  - personal recipes (shared or not)
-
-  - personal food items
-
-  - mode compare: food items and/or mix
+- personal recipes (shared or not)
   
-  - add more details about studies in case links go dead (name, authors, date, journal). new table?
+- personal food items
   
-  - special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
+- mode compare: food items and/or mix
+  
+- add more details about studies in case links go dead (name, authors, date, journal). new table?
+  
+- special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
 
 
 - Front
 
-  - display details about the types of DIAAS. ex DIAAS-rat-> DIAAS on rodents
+  - display details about the types of DIAAS in the detailed view. ex DIAAS-rat-> DIAAS on rodents
 
-  - display in the main page the type of measure (diaas, pdcaas...). using a logo?
+  - display in the main page the type of measure (diaas, pdcaas...). using a logo or a color?
 
   - contextual help (especially for mobile devices)
 
@@ -134,15 +129,12 @@ You can help with food item translation into other languages. See for example `f
 
 ## Dataset
 
-Gathering the `DIAAS` data is a tedious and error-prone process. Contributions could be :
-
-- Reviewing the current dataset, adding more data (see `fixtures/food.csv`)
+You can enrich our current dataset by adding lines in the `fixtures/food.csv` and `fixtures/food_i18n.csv` files
 
 Things to be careful with: 
 
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
-- Type of DIAAS : "real" DIAAS or in vivo or on rat model etc...
-- Type of digestive model. From least to most accurate : Apparent ileal digestibility (AID), Standardized ileal digestibility (SID), True ileal digestibility (TID)
+- Score standard, animal model, digestibility model : see the [user manual](http://localhost:4200/user-manual#information-about-food-items)
 - The amino acids are often given in the same order, but not always.
 - Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6 month old eat grains and legumes, and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 

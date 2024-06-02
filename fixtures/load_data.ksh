@@ -13,10 +13,7 @@ if [ "$env" != localhost -a "$env" != "cc" ]; then
     exit 1
 fi
 
-if [ "$env" = localhost ]; then
-    NETWORK="--network diaas-db"
-fi
-
+NETWORK="--network diaas-db"
 
 docker run -v $(pwd):/tmp $NETWORK --rm --name pgloader dimitri/pgloader:latest pgloader /tmp/csv.load.$env
 docker run -v $(pwd):/tmp $NETWORK --rm --name pgloader dimitri/pgloader:latest pgloader /tmp/csv.load.i18n.$env

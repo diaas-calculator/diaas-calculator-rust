@@ -5,3 +5,4 @@ fixtures/csv.load.cc
 fixtures/csv.load.i18n.cc
 .env.cc
 .env
+.clever.json
