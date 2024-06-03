@@ -109,8 +109,6 @@ In case something inspires you, here's the top of my todo list (please contact o
 
   - display details about the types of DIAAS in the detailed view. ex DIAAS-rat-> DIAAS on rodents
 
-  - display in the main page the type of measure (diaas, pdcaas...). using a logo or a color?
-
   - contextual help (especially for mobile devices)
 
   - search by type of food and other filters
