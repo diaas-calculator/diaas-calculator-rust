@@ -9,7 +9,6 @@ use diesel::PgConnection;
 use r2d2::{Pool, PooledConnection};
 
 mod constants;
-mod results;
 mod schema;
 mod food;
 
@@ -39,8 +38,6 @@ async fn main() -> Result<()> {
             // enable logger - always register actix-web Logger middleware last
             .wrap(middleware::Logger::default())
             // register HTTP requests handlers
-            .service(food::list)
-            .service(food::list_i18n)
             .service(food::get)
             .service(food::search)
             .service(food::search_i18n)
