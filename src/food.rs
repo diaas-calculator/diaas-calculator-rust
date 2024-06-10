@@ -43,6 +43,7 @@ pub async fn get(
 #[derive(Debug, Deserialize)]
 pub struct FoodSearch {
    name: Option<String>,
+   food_type: Option<String>,
    sort: Option<String>
 }
 /// search food items
@@ -58,6 +59,7 @@ pub async fn search(
                 actions::find_food_items(
                     MAX_FOOD_ITEMS,
                     &query_params.name,
+                    &query_params.food_type,
                     &query_params.sort,
                     &mut conn)
             )
@@ -71,6 +73,7 @@ pub async fn search(
 #[derive(Debug, Deserialize)]
 pub struct FoodSearchI18n {
    name: Option<String>,
+   food_type: Option<String>,
    lang: String,
    sort: Option<String>
 }
@@ -91,6 +94,7 @@ pub async fn search_i18n(
                 actions::find_food_items_i18n(
                     MAX_FOOD_ITEMS,
                     &query_params.name, 
+                    &query_params.food_type,
                     &query_params.lang, 
                     &query_params.sort,
                     &mut conn)
