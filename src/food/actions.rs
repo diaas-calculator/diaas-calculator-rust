@@ -1,6 +1,7 @@
 use diesel::result::Error;
 use diesel::prelude::*;
-//use log::{trace,error};
+//use log::warn;
+use log::warn;
 
 use diesel::{ExpressionMethods, RunQueryDsl, PgTextExpressionMethods, QueryDsl};
 use crate::DBPooledConnection;
@@ -19,7 +20,7 @@ pub fn get_food_item_by_id(_id: i32, conn: &mut DBPooledConnection) -> Result<Op
     Ok(food_item)
 }
 
-pub fn find_food_items(max_items: i64, param_name: &Option<String>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
+pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_sort: &Option<String>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
     use crate::schema::food::dsl::*;
 
     // using into_boxed for conditional filtering
@@ -31,9 +32,31 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, conn: &mut D
             .filter(name.ilike(pattern));
     }
 
-    query = query
-        .order(name)
-        .limit(max_items);
+    if let Some(some_sort) = param_sort {
+        let param_sort_str: &str = some_sort;
+        query = match param_sort_str{
+            "name" => query.order(name),
+            "protein_content" => query.order(protein_content.desc()),
+            "histidine_score" => query.order(histidine_score.desc()),
+            "isoleucine_score" => query.order(isoleucine_score.desc()),
+            "leucine_score" => query.order(leucine_score.desc()),
+            "lysine_score" => query.order(lysine_score.desc()),
+            "saa_score" => query.order(saa_score.desc()),
+            "aaa_score" => query.order(aaa_score.desc()),
+            "threonine_score" => query.order(threonine_score.desc()),
+            "tryptophane_score" => query.order(tryptophane_score.desc()),
+            "valine_score" => query.order(valine_score.desc()),
+            _ => {
+                    warn!("find_food_items: We don't know this sort parameter: {}.", some_sort);
+                    query.order(name)
+                }
+        };
+    }
+    else{
+        query = query.order(name);
+    }
+
+    query = query.limit(max_items);
 
     let _food_items = query.select(models::Food::as_select()).load::<models::Food>(conn)?;
     Ok(_food_items)
@@ -41,7 +64,7 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, conn: &mut D
 }
 
 
-pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_lang: &String, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
+pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_lang: &String, param_sort: &Option<String>, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
     use crate::schema::food::dsl::*;
     use crate::schema::food_i18n::dsl::*;
 
@@ -59,9 +82,32 @@ pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_l
             .filter(name_translation.ilike(pattern));
     }
 
-    query = query
-        .order(name_translation)
-        .limit(max_items);
+    if let Some(some_sort) = param_sort {
+        let param_sort_str: &str = some_sort;
+        query = match param_sort_str{
+            "name" => query.order(name_translation),
+            "protein_content" => query.order(protein_content.desc()),
+            "histidine_score" => query.order(histidine_score.desc()),
+            "isoleucine_score" => query.order(isoleucine_score.desc()),
+            "leucine_score" => query.order(leucine_score.desc()),
+            "lysine_score" => query.order(lysine_score.desc()),
+            "saa_score" => query.order(saa_score.desc()),
+            "aaa_score" => query.order(aaa_score.desc()),
+            "threonine_score" => query.order(threonine_score.desc()),
+            "tryptophane_score" => query.order(tryptophane_score.desc()),
+            "valine_score" => query.order(valine_score.desc()),
+            _ => {
+                    warn!("find_food_items_i18n: We don't know this sort parameter: {}.", some_sort);
+                    query.order(name_translation)
+                }
+        };
+    }
+    else{
+        query = query.order(name_translation);
+    }
+
+
+    query = query.limit(max_items);
 
     let _food_items = query.select((models::Food::as_select(),models::FoodI18n::as_select())).load::<(models::Food,models::FoodI18n)>(conn)?;
     Ok(_food_items)

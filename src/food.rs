@@ -1,7 +1,7 @@
 use actix_web::web::{Data, Json, Path};
 use actix_web::{error, get, post, delete, put, web, HttpResponse, Responder};
 use serde::Deserialize;
-use log::{warn};
+use log::warn;
 
 use crate::constants::{CONNECTION_POOL_ERROR, MAX_FOOD_ITEMS, I18N_LANGUAGES};
 use crate::DBPool;
@@ -41,9 +41,38 @@ pub async fn get(
 
 
 #[derive(Debug, Deserialize)]
+pub struct FoodSearch {
+   name: Option<String>,
+   sort: Option<String>
+}
+/// search food items
+#[get("api/food/search/")]
+pub async fn search(
+    query_params: web::Query<FoodSearch>, 
+    pool: Data<DBPool>
+) -> actix_web::Result<impl Responder> {
+    let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
+    let food_items = 
+        web::block(
+            move || 
+                actions::find_food_items(
+                    MAX_FOOD_ITEMS,
+                    &query_params.name,
+                    &query_params.sort,
+                    &mut conn)
+            )
+            .await?
+            // map diesel query errors to a 500 error response
+            .map_err(error::ErrorInternalServerError)?;
+
+    Ok(HttpResponse::Ok().json(food_items))
+}
+
+#[derive(Debug, Deserialize)]
 pub struct FoodSearchI18n {
    name: Option<String>,
-   lang: String
+   lang: String,
+   sort: Option<String>
 }
 
 #[get("api/food_i18n/search/")]
@@ -63,6 +92,7 @@ pub async fn search_i18n(
                     MAX_FOOD_ITEMS,
                     &query_params.name, 
                     &query_params.lang, 
+                    &query_params.sort,
                     &mut conn)
             )
             .await?
@@ -74,34 +104,6 @@ pub async fn search_i18n(
 
 
 
-
-
-#[derive(Debug, Deserialize)]
-pub struct FoodSearch {
-   name: Option<String>
-}
-/// search food items
-#[get("api/food/search/")]
-pub async fn search(
-    query_params: web::Query<FoodSearch>, 
-    pool: Data<DBPool>
-) -> actix_web::Result<impl Responder> {
-    //trace!("get api/food/search/ with name={}", query_params.name);
-    let mut conn = pool.get().expect(CONNECTION_POOL_ERROR);
-    let food_items = 
-        web::block(
-            move || 
-                actions::find_food_items(
-                    MAX_FOOD_ITEMS,
-                    &query_params.name,
-                    &mut conn)
-            )
-            .await?
-            // map diesel query errors to a 500 error response
-            .map_err(error::ErrorInternalServerError)?;
-
-    Ok(HttpResponse::Ok().json(food_items))
-}
 
 /// create a food item `/food`
 #[post("api/food")]
