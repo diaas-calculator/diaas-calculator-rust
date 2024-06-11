@@ -62,9 +62,9 @@ docker run -v $(pwd):/tmp --network diaas-db --rm --name pgloader dimitri/pgload
 
 # Accessing the application
 
-- API requests can be done against `http://localhost:9090/api`
+API requests can be done against `http://localhost:9090/api` (or `https://diaas-calculator.com/api` in production)
 
-For testing you can use the postman collection provided under `/test`
+For testing you can use the postman collection provided under `/test`. 
 
 Note that all the endpoints that modify data are deactivated for now (waiting for access control implementation). You can re-activate the missing endpoints in main.rs: 
 
@@ -110,8 +110,6 @@ In case something inspires you, here's the top of my todo list (please contact o
   - display details about the types of DIAAS in the detailed view. ex DIAAS-rat-> DIAAS on rodents
 
   - contextual help (especially for mobile devices)
-
-  - search by type of food and other filters
 
   - add "clear mix" button
 
