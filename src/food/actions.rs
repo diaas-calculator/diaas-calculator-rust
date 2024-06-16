@@ -7,6 +7,7 @@ use diesel::{ExpressionMethods, RunQueryDsl, PgTextExpressionMethods, QueryDsl};
 use crate::DBPooledConnection;
 type DbError = Box<dyn std::error::Error + Send + Sync>;
 use crate::food::models;
+use diesel::dsl::not;
 
 
 pub fn get_food_item_by_id(_id: i32, conn: &mut DBPooledConnection) -> Result<Option<models::Food>, DbError> {
@@ -20,7 +21,7 @@ pub fn get_food_item_by_id(_id: i32, conn: &mut DBPooledConnection) -> Result<Op
     Ok(food_item)
 }
 
-pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_sort: &Option<String>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
+pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
     use crate::schema::food::dsl::*;
 
     // using into_boxed for conditional filtering
@@ -36,6 +37,16 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_t
         let pattern = format!("%{}%", some_food_type);
         query = query
             .filter(food_type.ilike(pattern));
+    }
+
+    if let Some(some_show_hidden) = param_show_hidden {
+        if !some_show_hidden{
+            query = query.filter(not(hidden));
+        }
+    }
+    else{
+        // by default don't show hidden food items
+        query = query.filter(not(hidden));
     }
 
     if let Some(some_sort) = param_sort {
@@ -70,7 +81,7 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_t
 }
 
 
-pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_lang: &String, param_sort: &Option<String>, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
+pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_lang: &String, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
     use crate::schema::food::dsl::*;
     use crate::schema::food_i18n::dsl::*;
 
@@ -92,6 +103,16 @@ pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_f
         let pattern = format!("%{}%", some_food_type);
         query = query
             .filter(food_type.ilike(pattern));
+    }
+
+    if let Some(some_show_hidden) = param_show_hidden {
+        if !some_show_hidden{
+            query = query.filter(not(hidden));
+        }
+    }
+    else{
+        // by default don't show hidden food items
+        query = query.filter(not(hidden));
     }
 
     if let Some(some_sort) = param_sort {

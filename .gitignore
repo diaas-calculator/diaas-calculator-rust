@@ -1,6 +1,7 @@
 target
 fixtures/pgloader/*
-fixtures/food.xlsx
+fixtures/food_full.xlsx
+fixtures/food_full.csv
 fixtures/csv.load.cc
 fixtures/csv.load.i18n.cc
 .env.cc

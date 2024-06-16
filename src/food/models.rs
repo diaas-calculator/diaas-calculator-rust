@@ -24,7 +24,9 @@ pub struct Food {
     pub valine_score: f32,
     pub reference_link: String,
     pub reference_details: String,
-    pub comment: String
+    pub comment: String,
+    pub hidden: bool,
+    pub greenhouse_gas: f32
 }
 
 
@@ -47,7 +49,9 @@ impl Food {
             valine_score: f32,
             reference_link: String,
             reference_details: String,
-            comment: String
+            comment: String,
+            hidden: bool,
+            greenhouse_gas: f32
             ) -> Self {
         Self {
             // will be set by the database
@@ -69,7 +73,9 @@ impl Food {
             valine_score,
             reference_link,
             reference_details,
-            comment
+            comment,
+            hidden,
+            greenhouse_gas
         }
     }
 
@@ -93,7 +99,9 @@ impl Food {
             valine_score: self.valine_score,
             reference_link: self.reference_link.clone(),
             reference_details: self.reference_details.clone(),
-            comment: self.comment.clone()
+            comment: self.comment.clone(),
+            hidden: self.hidden,
+            greenhouse_gas: self.greenhouse_gas
         }
     }
 }
@@ -119,7 +127,9 @@ pub struct FoodDBForInsert {
     pub valine_score: f32,
     pub reference_link: String,
     pub reference_details: String,
-    pub comment: String
+    pub comment: String,
+    pub hidden: bool,
+    pub greenhouse_gas: f32
 }
 
 // For creating (and updating) a food (without an id)
@@ -142,13 +152,15 @@ pub struct NewFood {
     pub valine_score: Option<f32>,
     pub reference_link: Option<String>,
     pub reference_details: Option<String>,
-    pub comment: Option<String>
+    pub comment: Option<String>,
+    pub hidden: Option<bool>,
+    pub greenhouse_gas: Option<f32>
 }
 
 impl NewFood {
     pub fn to_food(&self) -> Option<Food> {
-        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment) {
-            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), Some(comment)) =>  
+        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment, self.hidden, self.greenhouse_gas) {
+            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), Some(comment), Some(hidden), Some(greenhouse_gas)) =>  
                 Some(
                         Food::new(
                             name.to_string(),
@@ -168,7 +180,9 @@ impl NewFood {
                             valine_score,
                             reference_link.to_string(),
                             reference_details.to_string(),
-                            comment.to_string()
+                            comment.to_string(),
+                            hidden,
+                            greenhouse_gas
                         )
                     ),
             _ => None

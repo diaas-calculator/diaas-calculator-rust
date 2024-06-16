@@ -2,13 +2,13 @@ LOAD CSV
    FROM 'food.csv' WITH ENCODING UTF-8
         HAVING FIELDS
         (
-           name,protein_content,food_type,score_type,protein_content_cooked_state,diaas_cooked_state,histidine_score,isoleucine_score,leucine_score,lysine_score,saa_score,aaa_score,threonine_score,tryptophane_score,valine_score,reference_link,reference_details,comment
+           name,protein_content,food_type,score_type,protein_content_cooked_state,diaas_cooked_state,histidine_score,isoleucine_score,leucine_score,lysine_score,saa_score,aaa_score,threonine_score,tryptophane_score,valine_score,reference_link,reference_details,comment,hidden,greenhouse_gas
         )
    INTO postgresql://diaasc:password1234!@db:5432/diaas-calculator
         TARGET TABLE food
         TARGET COLUMNS
         (
-           name,protein_content,food_type,score_type,protein_content_cooked_state,diaas_cooked_state,histidine_score,isoleucine_score,leucine_score,lysine_score,saa_score,aaa_score,threonine_score,tryptophane_score,valine_score,reference_link,reference_details,comment
+           name,protein_content,food_type,score_type,protein_content_cooked_state,diaas_cooked_state,histidine_score,isoleucine_score,leucine_score,lysine_score,saa_score,aaa_score,threonine_score,tryptophane_score,valine_score,reference_link,reference_details,comment,hidden,greenhouse_gas
         )
    WITH skip header = 1,
         fields optionally enclosed by '"',

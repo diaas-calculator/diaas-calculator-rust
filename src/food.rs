@@ -44,7 +44,8 @@ pub async fn get(
 pub struct FoodSearch {
    name: Option<String>,
    food_type: Option<String>,
-   sort: Option<String>
+   sort: Option<String>,
+   show_hidden: Option<bool>
 }
 /// search food items
 #[get("api/food/search/")]
@@ -61,6 +62,7 @@ pub async fn search(
                     &query_params.name,
                     &query_params.food_type,
                     &query_params.sort,
+                    query_params.show_hidden,
                     &mut conn)
             )
             .await?
@@ -75,7 +77,8 @@ pub struct FoodSearchI18n {
    name: Option<String>,
    food_type: Option<String>,
    lang: String,
-   sort: Option<String>
+   sort: Option<String>,
+   show_hidden: Option<bool>
 }
 
 #[get("api/food_i18n/search/")]
@@ -97,6 +100,7 @@ pub async fn search_i18n(
                     &query_params.food_type,
                     &query_params.lang, 
                     &query_params.sort,
+                    query_params.show_hidden,
                     &mut conn)
             )
             .await?

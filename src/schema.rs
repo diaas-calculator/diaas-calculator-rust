@@ -21,6 +21,8 @@ diesel::table! {
         reference_link -> Varchar,
         reference_details -> Varchar,
         comment -> Varchar,
+        hidden -> Bool,
+        greenhouse_gas -> Float4,
     }
 }
 
