@@ -44,6 +44,7 @@ pub async fn get(
 pub struct FoodSearch {
    name: Option<String>,
    food_type: Option<String>,
+   aa_profile: Option<String>,
    sort: Option<String>,
    show_hidden: Option<bool>
 }
@@ -61,6 +62,7 @@ pub async fn search(
                     MAX_FOOD_ITEMS,
                     &query_params.name,
                     &query_params.food_type,
+                    &query_params.aa_profile,
                     &query_params.sort,
                     query_params.show_hidden,
                     &mut conn)
@@ -76,6 +78,7 @@ pub async fn search(
 pub struct FoodSearchI18n {
    name: Option<String>,
    food_type: Option<String>,
+   aa_profile: Option<String>,
    lang: String,
    sort: Option<String>,
    show_hidden: Option<bool>
@@ -98,6 +101,7 @@ pub async fn search_i18n(
                     MAX_FOOD_ITEMS,
                     &query_params.name, 
                     &query_params.food_type,
+                    &query_params.aa_profile,
                     &query_params.lang, 
                     &query_params.sort,
                     query_params.show_hidden,

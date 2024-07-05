@@ -21,7 +21,7 @@ pub fn get_food_item_by_id(_id: i32, conn: &mut DBPooledConnection) -> Result<Op
     Ok(food_item)
 }
 
-pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
+pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_aa_profile: &Option<String>, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<models::Food>, Error>  {
     use crate::schema::food::dsl::*;
 
     // using into_boxed for conditional filtering
@@ -34,9 +34,63 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_t
     }
 
     if let Some(some_food_type) = param_food_type {
-        let pattern = format!("%{}%", some_food_type);
         query = query
-            .filter(food_type.ilike(pattern));
+            .filter(food_type.ilike(some_food_type));
+    }
+
+    if let Some(some_aa_profile) = param_aa_profile {
+        let aa_profile_str = some_aa_profile.as_str();
+        match aa_profile_str{
+            "high-quality" => {
+                query = query
+                    .filter(histidine_score.ge(75.0))
+                    .filter(isoleucine_score.ge(75.0))
+                    .filter(leucine_score.ge(75.0))
+                    .filter(lysine_score.ge(75.0))
+                    .filter(saa_score.ge(75.0))
+                    .filter(aaa_score.ge(75.0))
+                    .filter(threonine_score.ge(75.0))
+                    .filter(tryptophane_score.ge(75.0))
+                    .filter(valine_score.ge(75.0))
+            }
+            "his+" => {
+                query = query
+                    .filter(histidine_score.gt(100.0))
+            }
+            "ile+" => {
+                query = query
+                    .filter(isoleucine_score.gt(100.0))
+            }
+            "leu+" => {
+                query = query
+                    .filter(leucine_score.gt(100.0))
+            }
+            "lys+" => {
+                query = query
+                    .filter(lysine_score.gt(100.0))
+            }
+            "saa+" => {
+                query = query
+                    .filter(saa_score.gt(100.0))
+            }
+            "aaa+" => {
+                query = query
+                    .filter(aaa_score.gt(100.0))
+            }
+            "thr+" => {
+                query = query
+                    .filter(threonine_score.gt(100.0))
+            }
+            "trp+" => {
+                query = query
+                    .filter(tryptophane_score.gt(100.0))
+            }
+            "val+" => {
+                query = query
+                    .filter(valine_score.gt(100.0))
+            }
+            _ => {}
+        }
     }
 
     if let Some(some_show_hidden) = param_show_hidden {
@@ -81,7 +135,7 @@ pub fn find_food_items(max_items: i64, param_name: &Option<String>, param_food_t
 }
 
 
-pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_lang: &String, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
+pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_food_type: &Option<String>, param_aa_profile: &Option<String>, param_lang: &String, param_sort: &Option<String>, param_show_hidden: Option<bool>, conn: &mut DBPooledConnection) -> Result<Vec<(models::Food,models::FoodI18n)>, Error>  {
     use crate::schema::food::dsl::*;
     use crate::schema::food_i18n::dsl::*;
 
@@ -103,6 +157,61 @@ pub fn find_food_items_i18n(max_items: i64, param_name: &Option<String>, param_f
         let pattern = format!("%{}%", some_food_type);
         query = query
             .filter(food_type.ilike(pattern));
+    }
+
+    if let Some(some_aa_profile) = param_aa_profile {
+        let aa_profile_str = some_aa_profile.as_str();
+        match aa_profile_str{
+            "high-quality" => {
+                query = query
+                    .filter(histidine_score.ge(75.0))
+                    .filter(isoleucine_score.ge(75.0))
+                    .filter(leucine_score.ge(75.0))
+                    .filter(lysine_score.ge(75.0))
+                    .filter(saa_score.ge(75.0))
+                    .filter(aaa_score.ge(75.0))
+                    .filter(threonine_score.ge(75.0))
+                    .filter(tryptophane_score.ge(75.0))
+                    .filter(valine_score.ge(75.0))
+            }
+            "his+" => {
+                query = query
+                    .filter(histidine_score.gt(100.0))
+            }
+            "ile+" => {
+                query = query
+                    .filter(isoleucine_score.gt(100.0))
+            }
+            "leu+" => {
+                query = query
+                    .filter(leucine_score.gt(100.0))
+            }
+            "lys+" => {
+                query = query
+                    .filter(lysine_score.gt(100.0))
+            }
+            "saa+" => {
+                query = query
+                    .filter(saa_score.gt(100.0))
+            }
+            "aaa+" => {
+                query = query
+                    .filter(aaa_score.gt(100.0))
+            }
+            "thr+" => {
+                query = query
+                    .filter(threonine_score.gt(100.0))
+            }
+            "trp+" => {
+                query = query
+                    .filter(tryptophane_score.gt(100.0))
+            }
+            "val+" => {
+                query = query
+                    .filter(valine_score.gt(100.0))
+            }
+            _ => {}
+        }
     }
 
     if let Some(some_show_hidden) = param_show_hidden {
