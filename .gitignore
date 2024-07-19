@@ -2,8 +2,10 @@ target
 fixtures/pgloader/*
 fixtures/food_full.xlsx
 fixtures/food_full.csv
-fixtures/csv.load.cc
-fixtures/csv.load.i18n.cc
+fixtures/csv_load_food.cc
+fixtures/csv_load_food_i18n.cc
+fixtures/csv_load_mix.cc
+fixtures/csv_load_mix_food.cc
 .env.cc
 .env
 .clever.json

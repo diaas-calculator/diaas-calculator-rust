@@ -11,6 +11,7 @@ use r2d2::{Pool, PooledConnection};
 mod constants;
 mod schema;
 mod food;
+mod mix;
 
 pub type DBPool = Pool<ConnectionManager<PgConnection>>;
 pub type DBPooledConnection = PooledConnection<ConnectionManager<PgConnection>>;
@@ -45,6 +46,9 @@ async fn main() -> Result<()> {
             //.service(food::create)
             //.service(food::delete)
             //.service(food::update)
+            .service(mix::get_mix)
+            .service(mix::get_mix_with_food)
+            .service(mix::list_mixes)
     })
     .bind(bin_addr)?
     .run()

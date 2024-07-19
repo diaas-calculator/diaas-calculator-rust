@@ -7,7 +7,7 @@ use crate::constants::{CONNECTION_POOL_ERROR, MAX_FOOD_ITEMS, I18N_LANGUAGES};
 use crate::DBPool;
 
 mod actions;
-mod models;
+pub mod models;
 
 
 /// get a food item by its id `/food/{id}`
