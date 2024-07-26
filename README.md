@@ -86,8 +86,6 @@ In case something inspires you, here's the top of my todo list (please contact o
 - Front + Back: 
 
   - giving suggestion based on current mix (a specific search request with the current mix diaaas, so that the backend sorts the food items by better match first.)
-
-  - suggested / example mixes
 - g co2/g of protein
   - equivalent g of complete protein
 
@@ -95,29 +93,18 @@ In case something inspires you, here's the top of my todo list (please contact o
 - unit test, ci-cd
   - user profile
 - personal recipes (shared or not)
-  
 - personal food items
-  
 - mode compare: food items and/or mix
-  
 - add more details about studies in case links go dead (name, authors, date, journal). new table?
-  
 - special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
 
 
 - Front
 
   - display details about the types of DIAAS in the detailed view. ex DIAAS-rat-> DIAAS on rodents
-
-  - contextual help (especially for mobile devices)
-
-  - add "clear mix" button
-
-  - switch to other age diaas (it is a simple multiplication)
-
+- switch to other age diaas (it is a simple multiplication)
   - search that starts running without entering "search" button (after a pause in typing)
-
-  - more elements translated in the GUI
+- more elements translated in the GUI
 
 ## Translation
 
