@@ -48,6 +48,7 @@ async fn main() -> Result<()> {
             //.service(food::update)
             .service(mix::get_mix)
             .service(mix::get_mix_with_food)
+            .service(mix::get_mix_with_food_i18n)
             .service(mix::list_mixes)
     })
     .bind(bin_addr)?

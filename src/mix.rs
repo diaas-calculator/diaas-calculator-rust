@@ -30,7 +30,7 @@ pub async fn list_mixes(
             Ok(HttpResponse::Ok().json(mixes))
 }
 
-/// get a mix details by its id `/mix/{id} (without the food items)`
+/// get a mix details by its id (without the food items)
 #[get("api/mix/{id}")]
 pub async fn get_mix(
     path: Path<(i32,)>, 
@@ -53,7 +53,7 @@ pub async fn get_mix(
             Ok(HttpResponse::Ok().json(my_mix))
 }
 
-/// get a mix by its id. `/mix-with-food/{id}`
+/// get a mix by its id.
 /// Doesn't include all the mix detail but includes all the food items in the mix
 #[get("api/mix-with-food/{id}")]
 pub async fn get_mix_with_food(
@@ -77,3 +77,26 @@ pub async fn get_mix_with_food(
             Ok(HttpResponse::Ok().json(my_mix))
 }
 
+/// get a mix by its id with food name translation
+/// Doesn't include all the mix detail but includes all the food items in the mix
+#[get("api/mix-with-food-i18n/{id}")]
+pub async fn get_mix_with_food_i18n(
+    path: Path<(i32,)>, 
+    pool: Data<DBPool>
+)-> actix_web::Result<impl Responder> {
+    let mix_id = path.0;
+    // use web::block to offload blocking Diesel queries without blocking server thread
+    let my_mix =
+        web::block(move || {
+                // note that obtaining a connection from the pool is also potentially blocking
+                let mut conn = pool.get()?;
+                    actions::get_mix_by_id_with_food_i18n(
+                    mix_id, 
+                    &mut conn)
+            })
+            .await?
+            // map diesel query errors to a 500 error response
+            .map_err(error::ErrorInternalServerError)?;
+
+            Ok(HttpResponse::Ok().json(my_mix))
+}

@@ -50,3 +50,11 @@ pub struct MixFoodJoin{
     pub food_weight: f32,
     pub food: Food,
 }
+
+#[derive(Deserialize, Serialize, Queryable)]
+pub struct MixFoodJoinI18n{
+    pub id: i32,
+    pub food_weight: f32,
+    pub name_translation: String,
+    pub food: Food,
+}
