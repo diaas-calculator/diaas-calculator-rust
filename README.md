@@ -114,22 +114,29 @@ You can help with food item translation into other languages. See for example `f
 
 You can enrich our current dataset by adding lines in the `fixtures/food.csv` and `fixtures/food_i18n.csv` files
 
-Things to be careful with: 
+### Points of attention
 
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
 - Score standard, animal model, digestibility model : see the [user manual](http://localhost:4200/user-manual#information-about-food-items)
-- The amino acids are often given in the same order, but not always.
 - Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6 month old eat grains and legumes, and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 
 | his  | iso        | leu        | lys    | met+cys    | phe+tyr    | thr  | trp        | val   |
 | ---- | ---------- | ---------- | ------ | ---------- | ---------- | ---- | ---------- | ----- |
 | 1,25 | 1,06666667 | 1,08196721 | 1,1875 | 1,17391304 | 1,26829268 | 1,24 | 1,28787879 | 1,075 |
 
-To convert from the *PDCAAS* *2-5 years old* reference pattern to the *DIAAS* *>3years old* reference pattern, use those coefficients: 
+To convert from the *PDCAAS* *2-5 years old* reference pattern to the *DIAAS* *>3 years old* reference pattern, use those coefficients: 
 
 | his    | iso        | leu        | lys        | met+cys    | phe+tyr    | thr  | trp        | val   |
 | ------ | ---------- | ---------- | ---------- | ---------- | ---------- | ---- | ---------- | ----- |
 | 1,1875 | 0,93333333 | 1,08196721 | 1,20833333 | 1,08695652 | 1,53658537 | 1,36 | 1,66666667 | 0,875 |
+
+### Computing the DIAAS
+
+Sometimes it is required to gather data from different sources and compute the DIAAS, especially when it comes to processing (extrusion, baking, cooking...) for which data is really scarse. Or it may be required when a study results are incoherent or when some data is missing or not publicly available.
+
+To do this, the excel sheet in this meta-study is really helping: https://data.mendeley.com/datasets/gz3cx7d5f4/1
+
+Don't hesitate to ask my latest version on slack. I have also initiated one for PDCAAS scores.
 
 ## Content reviewing
 
