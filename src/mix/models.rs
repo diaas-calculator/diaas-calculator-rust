@@ -13,7 +13,8 @@ pub struct Mix {
     pub id: i32,
     pub visibility: i16,
     pub name: String,
-    pub description: Option<String>
+    pub description: Option<String>,
+    pub recipe_link: Option<String>
 }
 
 
@@ -21,14 +22,16 @@ impl Mix {
     pub fn new(
         visibility: i16,
         name: String,
-        description: Option<String>
+        description: Option<String>,
+        recipe_link: Option<String>
             ) -> Self {
         Self {
             // will be set by the database
             id: 0,
             visibility,
             name,
-            description
+            description,
+            recipe_link
         }
     }
 }

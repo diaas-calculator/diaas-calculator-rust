@@ -40,6 +40,7 @@ diesel::table! {
         visibility -> Int2,
         name -> Varchar,
         description -> Nullable<Varchar>,
+        recipe_link -> Nullable<Varchar>,
     }
 }
 

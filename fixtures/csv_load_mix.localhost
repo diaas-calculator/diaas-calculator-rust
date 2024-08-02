@@ -2,13 +2,13 @@ LOAD CSV
    FROM 'mix.csv' WITH ENCODING UTF-8
         HAVING FIELDS
         (
-           id,visibility,name,description
+           id,visibility,name,description,recipe_link
         )
    INTO postgresql://diaasc:password1234!@db:5432/diaas-calculator
         TARGET TABLE mix
         TARGET COLUMNS
         (
-           id,visibility,name,description
+           id,visibility,name,description,recipe_link
         )
    WITH skip header = 1,
         fields optionally enclosed by '"',

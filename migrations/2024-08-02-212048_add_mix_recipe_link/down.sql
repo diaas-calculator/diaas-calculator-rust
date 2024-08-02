@@ -1,0 +1,1 @@
+ALTER TABLE "mix" DROP COLUMN "recipe_link";
