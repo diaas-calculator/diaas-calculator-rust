@@ -23,6 +23,9 @@ diesel::table! {
         comment -> Varchar,
         hidden -> Bool,
         greenhouse_gas -> Float4,
+        greenhouse_gas_ref -> Nullable<Varchar>,
+        greenhouse_gas_link -> Nullable<Varchar>,
+        greenhouse_gas_comment -> Nullable<Varchar>,
     }
 }
 

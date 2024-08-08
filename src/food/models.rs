@@ -26,7 +26,12 @@ pub struct Food {
     pub reference_details: String,
     pub comment: String,
     pub hidden: bool,
-    pub greenhouse_gas: f32
+    // the greenhouse_gas in kg of eqCo2 per kg of food
+    pub greenhouse_gas: f32,
+    // the food item used in the greenhouse gas database
+    pub greenhouse_gas_ref: Option<String>,
+    pub greenhouse_gas_link: Option<String>,
+    pub greenhouse_gas_comment: Option<String>
 }
 
 
@@ -51,7 +56,10 @@ impl Food {
             reference_details: String,
             comment: String,
             hidden: bool,
-            greenhouse_gas: f32
+            greenhouse_gas: f32,
+            greenhouse_gas_ref: Option<String>,
+            greenhouse_gas_link: Option<String>,
+            greenhouse_gas_comment: Option<String>
             ) -> Self {
         Self {
             // will be set by the database
@@ -75,7 +83,10 @@ impl Food {
             reference_details,
             comment,
             hidden,
-            greenhouse_gas
+            greenhouse_gas,
+            greenhouse_gas_ref,
+            greenhouse_gas_link,
+            greenhouse_gas_comment
         }
     }
 
@@ -101,7 +112,10 @@ impl Food {
             reference_details: self.reference_details.clone(),
             comment: self.comment.clone(),
             hidden: self.hidden,
-            greenhouse_gas: self.greenhouse_gas
+            greenhouse_gas: self.greenhouse_gas,
+            greenhouse_gas_ref: self.greenhouse_gas_ref.clone(),
+            greenhouse_gas_link: self.greenhouse_gas_link.clone(),
+            greenhouse_gas_comment: self.greenhouse_gas_comment.clone()
         }
     }
 }
@@ -129,7 +143,10 @@ pub struct FoodDBForInsert {
     pub reference_details: String,
     pub comment: String,
     pub hidden: bool,
-    pub greenhouse_gas: f32
+    pub greenhouse_gas: f32,
+    pub greenhouse_gas_ref: Option<String>,
+    pub greenhouse_gas_link: Option<String>,
+    pub greenhouse_gas_comment: Option<String>
 }
 
 // For creating (and updating) a food (without an id)
@@ -154,13 +171,16 @@ pub struct NewFood {
     pub reference_details: Option<String>,
     pub comment: Option<String>,
     pub hidden: Option<bool>,
-    pub greenhouse_gas: Option<f32>
+    pub greenhouse_gas: Option<f32>,
+    pub greenhouse_gas_ref: Option<String>,
+    pub greenhouse_gas_link: Option<String>,
+    pub greenhouse_gas_comment: Option<String>
 }
 
 impl NewFood {
     pub fn to_food(&self) -> Option<Food> {
-        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment, self.hidden, self.greenhouse_gas) {
-            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), Some(comment), Some(hidden), Some(greenhouse_gas)) =>  
+        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment, self.hidden, self.greenhouse_gas, &self.greenhouse_gas_ref, &self.greenhouse_gas_link, &self.greenhouse_gas_comment) {
+            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), Some(comment), Some(hidden), Some(greenhouse_gas), greenhouse_gas_ref, greenhouse_gas_link, greenhouse_gas_comment) =>  
                 Some(
                         Food::new(
                             name.to_string(),
@@ -182,7 +202,10 @@ impl NewFood {
                             reference_details.to_string(),
                             comment.to_string(),
                             hidden,
-                            greenhouse_gas
+                            greenhouse_gas,
+                            greenhouse_gas_ref.clone(),
+                            greenhouse_gas_link.clone(),
+                            greenhouse_gas_comment.clone()
                         )
                     ),
             _ => None
