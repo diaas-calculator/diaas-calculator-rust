@@ -20,12 +20,14 @@ diesel::table! {
         valine_score -> Float4,
         reference_link -> Varchar,
         reference_details -> Varchar,
-        comment -> Varchar,
+        comment -> Nullable<Varchar>,
         hidden -> Bool,
         greenhouse_gas -> Float4,
         greenhouse_gas_ref -> Nullable<Varchar>,
         greenhouse_gas_link -> Nullable<Varchar>,
         greenhouse_gas_comment -> Nullable<Varchar>,
+        comment_expert -> Nullable<Varchar>,
+        greenhouse_gas_comment_expert -> Nullable<Varchar>,
     }
 }
 

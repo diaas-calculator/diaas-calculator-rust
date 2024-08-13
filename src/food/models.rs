@@ -2,7 +2,7 @@ use diesel::prelude::*;
 use super::super::schema::{food,food_i18n};
 use serde::{Deserialize, Serialize};
 
-//TODO handle reference_details and comment null
+//Filds must be in the same order as in schema.rs
 #[derive(Debug, Deserialize, Serialize, Queryable, Insertable, Selectable)]
 #[diesel(table_name = food)]
 pub struct Food {
@@ -24,14 +24,16 @@ pub struct Food {
     pub valine_score: f32,
     pub reference_link: String,
     pub reference_details: String,
-    pub comment: String,
+    pub comment: Option<String>,
     pub hidden: bool,
     // the greenhouse_gas in kg of eqCo2 per kg of food
     pub greenhouse_gas: f32,
     // the food item used in the greenhouse gas database
     pub greenhouse_gas_ref: Option<String>,
     pub greenhouse_gas_link: Option<String>,
-    pub greenhouse_gas_comment: Option<String>
+    pub greenhouse_gas_comment: Option<String>,
+    pub comment_expert: Option<String>,
+    pub greenhouse_gas_comment_expert: Option<String>
 }
 
 
@@ -54,12 +56,14 @@ impl Food {
             valine_score: f32,
             reference_link: String,
             reference_details: String,
-            comment: String,
+            comment: Option<String>,
             hidden: bool,
             greenhouse_gas: f32,
             greenhouse_gas_ref: Option<String>,
             greenhouse_gas_link: Option<String>,
-            greenhouse_gas_comment: Option<String>
+            greenhouse_gas_comment: Option<String>,
+            comment_expert: Option<String>,
+            greenhouse_gas_comment_expert: Option<String>
             ) -> Self {
         Self {
             // will be set by the database
@@ -86,7 +90,9 @@ impl Food {
             greenhouse_gas,
             greenhouse_gas_ref,
             greenhouse_gas_link,
-            greenhouse_gas_comment
+            greenhouse_gas_comment,
+            comment_expert,
+            greenhouse_gas_comment_expert
         }
     }
 
@@ -115,7 +121,9 @@ impl Food {
             greenhouse_gas: self.greenhouse_gas,
             greenhouse_gas_ref: self.greenhouse_gas_ref.clone(),
             greenhouse_gas_link: self.greenhouse_gas_link.clone(),
-            greenhouse_gas_comment: self.greenhouse_gas_comment.clone()
+            greenhouse_gas_comment: self.greenhouse_gas_comment.clone(),
+            comment_expert: self.comment_expert.clone(),
+            greenhouse_gas_comment_expert: self.greenhouse_gas_comment_expert.clone()
         }
     }
 }
@@ -141,12 +149,14 @@ pub struct FoodDBForInsert {
     pub valine_score: f32,
     pub reference_link: String,
     pub reference_details: String,
-    pub comment: String,
+    pub comment: Option<String>,
     pub hidden: bool,
     pub greenhouse_gas: f32,
     pub greenhouse_gas_ref: Option<String>,
     pub greenhouse_gas_link: Option<String>,
-    pub greenhouse_gas_comment: Option<String>
+    pub greenhouse_gas_comment: Option<String>,
+    pub comment_expert: Option<String>,
+    pub greenhouse_gas_comment_expert: Option<String>,
 }
 
 // For creating (and updating) a food (without an id)
@@ -174,13 +184,15 @@ pub struct NewFood {
     pub greenhouse_gas: Option<f32>,
     pub greenhouse_gas_ref: Option<String>,
     pub greenhouse_gas_link: Option<String>,
-    pub greenhouse_gas_comment: Option<String>
+    pub greenhouse_gas_comment: Option<String>,
+    pub comment_expert: Option<String>,
+    pub greenhouse_gas_comment_expert: Option<String>
 }
 
 impl NewFood {
     pub fn to_food(&self) -> Option<Food> {
-        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment, self.hidden, self.greenhouse_gas, &self.greenhouse_gas_ref, &self.greenhouse_gas_link, &self.greenhouse_gas_comment) {
-            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), Some(comment), Some(hidden), Some(greenhouse_gas), greenhouse_gas_ref, greenhouse_gas_link, greenhouse_gas_comment) =>  
+        match (&self.name, self.protein_content, &self.food_type, &self.score_type, &self.protein_content_cooked_state, &self.diaas_cooked_state, self.histidine_score, self.isoleucine_score, self.leucine_score, self.lysine_score, self.saa_score, self.aaa_score, self.threonine_score, self.tryptophane_score, self.valine_score, &self.reference_link, &self.reference_details, &self.comment, self.hidden, self.greenhouse_gas, &self.greenhouse_gas_ref, &self.greenhouse_gas_link, &self.greenhouse_gas_comment, &self.comment_expert, &self.greenhouse_gas_comment_expert) {
+            (Some(name), Some(protein_content), Some(food_type), Some(score_type), Some(protein_content_cooked_state), Some(diaas_cooked_state), Some(histidine_score), Some(isoleucine_score), Some(leucine_score), Some(lysine_score), Some(saa_score), Some(aaa_score), Some(threonine_score), Some(tryptophane_score), Some(valine_score), Some(reference_link), Some(reference_details), comment, Some(hidden), Some(greenhouse_gas), greenhouse_gas_ref, greenhouse_gas_link, greenhouse_gas_comment, comment_expert, greenhouse_gas_comment_expert) =>  
                 Some(
                         Food::new(
                             name.to_string(),
@@ -200,12 +212,14 @@ impl NewFood {
                             valine_score,
                             reference_link.to_string(),
                             reference_details.to_string(),
-                            comment.to_string(),
+                            comment.clone(),
                             hidden,
                             greenhouse_gas,
                             greenhouse_gas_ref.clone(),
                             greenhouse_gas_link.clone(),
-                            greenhouse_gas_comment.clone()
+                            greenhouse_gas_comment.clone(),
+                            comment_expert.clone(),
+                            greenhouse_gas_comment_expert.clone()
                         )
                     ),
             _ => None
