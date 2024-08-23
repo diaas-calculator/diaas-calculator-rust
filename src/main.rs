@@ -36,8 +36,6 @@ async fn main() -> Result<()> {
         App::new()
             // Set up DB pool to be used with web::Data<Pool> extractor
             .app_data(Data::new(pool.clone()))
-            // enable logger - always register actix-web Logger middleware last
-            .wrap(middleware::Logger::default())
             // register HTTP requests handlers
             .service(food::get)
             .service(food::search)
@@ -50,6 +48,8 @@ async fn main() -> Result<()> {
             .service(mix::get_mix_with_food)
             .service(mix::get_mix_with_food_i18n)
             .service(mix::list_mixes)
+            // enable logger - always register actix-web Logger middleware last
+            .wrap(middleware::Logger::default())
     })
     .bind(bin_addr)?
     .run()
