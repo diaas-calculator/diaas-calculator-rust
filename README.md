@@ -81,30 +81,33 @@ Note that all the endpoints that modify data are deactivated for now (waiting fo
 
 This is an opensource project. All the contributions are welcome!
 
-In case something inspires you, here's the top of my todo list (please contact on on slack before starting anything significant): 
+In case something inspires you, here's the top of my todo list (please contact me on slack before starting anything significant): 
 
 - Front + Back: 
-
+  - add food as doses by default instead of 100g (1 egg, 1 portion of xxx = x grams)
   - giving suggestion based on current mix (a specific search request with the current mix diaaas, so that the backend sorts the food items by better match first.)
-- g co2/g of protein
   - equivalent g of complete protein
-
-  - hidden flag: for diaas that we keep for comparison but we want to hide to most users because we believe there is a better result
-- unit test, ci-cd
+  - crude to cooked factor + in app conversion
+  - unit test, ci-cd
   - user profile
-- personal recipes (shared or not)
-- personal food items
-- mode compare: food items and/or mix
-- add more details about studies in case links go dead (name, authors, date, journal). new table?
-- special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
+  - personal recipes (shared or not)
+  - personal food items
+  - mode compare: food items and/or mix
+  - add more details about studies in case links go dead (name, authors, date, journal). new table?
+  - special editor profiles who are allowed to update/delete/create food items (with validation of the administrator)
+
 
 
 - Front
 
+  - new page about carbon footprint
+    - the impact of food on the carbon footprint in general
+    - specifically the impact of meat and dairy (compared to transport / packaging)
+  - android/IOS app
   - display details about the types of DIAAS in the detailed view. ex DIAAS-rat-> DIAAS on rodents
-- switch to other age diaas (it is a simple multiplication)
+  - switch to other age diaas (it is a simple multiplication)
   - search that starts running without entering "search" button (after a pause in typing)
-- more elements translated in the GUI
+  - more elements translated in the GUI
 
 ## Translation
 
@@ -112,7 +115,7 @@ You can help with food item translation into other languages. See for example `f
 
 ## Dataset
 
-You can enrich our current dataset by adding lines in the `fixtures/food.csv` and `fixtures/food_i18n.csv` files
+You can enrich our current dataset by adding lines in the `fixtures/food.csv` and `fixtures/food_i18n.csv` files and directly send us what you would like to see added.
 
 ### Points of attention
 
