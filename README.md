@@ -136,12 +136,12 @@ Sometimes it is required to gather data from different sources and compute the D
 
 To do this, the excel sheet in this meta-study is really helping: https://data.mendeley.com/datasets/gz3cx7d5f4/1
 
-Don't hesitate to ask my latest version on slack. I have also initiated one for PDCAAS scores.
+Feel free to ask my latest version on slack. I have also initiated one for PDCAAS scores.
 
 ## Content reviewing
 
-Don't hesitate to reach us should you find any error, be it English error, or scientific fact error.
+Feel free to reach us should you find any error
 
 # Contact us
 
-Don't hesitate to [contact us on slack](https://join.slack.com/t/nouvelespaced-u4p4016/shared_invite/zt-2jknsft6u-4RSF2n09gGkJtXqBvvpQZg) if you have any questions or want to discuss anything about this project.
+Feel free to [contact us on slack](https://join.slack.com/t/nouvelespaced-u4p4016/shared_invite/zt-2jknsft6u-4RSF2n09gGkJtXqBvvpQZg) if you have any questions or want to discuss anything about this project.
