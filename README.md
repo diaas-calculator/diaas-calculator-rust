@@ -85,6 +85,7 @@ In case something inspires you, here's the top of my todo list (please contact m
 
 - Front + Back: 
   - add food as doses by default instead of 100g (1 egg, 1 portion of xxx = x grams)
+  - pagination (don't display all food items, just 10 or 20 and paginate the next results)
   - giving suggestion based on current mix (a specific search request with the current mix diaaas, so that the backend sorts the food items by better match first.)
   - equivalent g of complete protein
   - crude to cooked factor + in app conversion
