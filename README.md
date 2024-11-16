@@ -122,7 +122,7 @@ You can enrich our current dataset by adding lines in the `fixtures/food.csv` an
 
 - Preparation of the food: see https://www.diaas-calculator.com/diaas-information#limitations-and-precautions
 - Score standard, animal model, digestibility model : see the [user manual](http://localhost:4200/user-manual#information-about-food-items)
-- Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We chose to display the information for the reference pattern `>3y` by default as you can hardly have a 6 month old eat grains and legumes, and mixing grains and legumes are one of the best strategies for what we want to achieve. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
+- Age reference pattern: the reference pattern used is often `6month->3years` (it is the default one as per the FAO recommendations). We display the information for the reference pattern `>3y` by default. It is a simple multiplicative factor to get from the 6m->3y to the >3y pattern: 
 
 | his  | iso        | leu        | lys    | met+cys    | phe+tyr    | thr  | trp        | val   |
 | ---- | ---------- | ---------- | ------ | ---------- | ---------- | ---- | ---------- | ----- |
